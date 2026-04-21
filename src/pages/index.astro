@@ -1,0 +1,105 @@
+---
+import Base from '../layouts/Base.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Store",
+  "name": "Harmony Threads",
+  "description": "Music-inspired apparel and digital content for rock music fans.",
+  "url": "https://harmony-threads.vercel.app",
+};
+---
+<Base
+  title="Harmony Threads — Wear the Music. Own the Story."
+  description="Music-inspired graphic tees and digital content for rock fans. Shop The Band T-Shirt and the History of Rock Music ebook."
+  schema={schema}
+>
+  <!-- Hero -->
+  <section style="background:var(--ink); min-height:100vh; position:relative; overflow:hidden;">
+    <div class="max-w-7xl mx-auto px-6 pt-32 pb-24 md:pt-40 md:pb-32">
+      <div class="flex flex-col md:flex-row items-center gap-12 md:gap-16">
+        <div class="flex-1 max-w-2xl">
+          <p class="text-xs font-semibold uppercase tracking-widest mb-6" style="color:var(--accent);">Music Merch &amp; Digital Content</p>
+          <h1 class="text-5xl md:text-7xl font-bold leading-[1.0] tracking-tight mb-6" style="font-family:'Playfair Display',serif;color:var(--paper);">
+            Wear the music.<br/>
+            <em>Own the story.</em>
+          </h1>
+          <p class="text-lg font-light leading-relaxed mb-10 max-w-lg" style="color:rgba(250,247,242,0.7);">
+            Graphic tees that carry the legacy of rock's greatest acts. Plus deep-dive digital books for when the record ends and the story begins.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a href="/shop" class="px-7 py-3.5 text-sm font-semibold rounded transition-all hover:-translate-y-0.5" style="background:var(--accent);color:#FAF7F2;">Shop the Collection</a>
+            <a href="#featured" class="px-7 py-3.5 text-sm font-medium rounded" style="border:1px solid rgba(250,247,242,0.3);color:var(--paper);">See What's New</a>
+          </div>
+          <div class="flex items-center gap-6 mt-12 pt-10" style="border-top:1px solid rgba(250,247,242,0.1);">
+            <div><p class="text-2xl font-bold" style="color:var(--paper);font-family:'Playfair Display',serif;">473</p><p class="text-xs" style="color:rgba(250,247,242,0.5);">Orders shipped</p></div>
+            <div style="width:1px;height:32px;background:rgba(250,247,242,0.15);"></div>
+            <div><p class="text-2xl font-bold" style="color:var(--paper);font-family:'Playfair Display',serif;">3</p><p class="text-xs" style="color:rgba(250,247,242,0.5);">Products</p></div>
+            <div style="width:1px;height:32px;background:rgba(250,247,242,0.15);"></div>
+            <div><p class="text-2xl font-bold" style="color:var(--paper);font-family:'Playfair Display',serif;">★ 4.9</p><p class="text-xs" style="color:rgba(250,247,242,0.5);">Avg rating</p></div>
+          </div>
+        </div>
+        <div class="flex-1 flex justify-center md:justify-end">
+          <div class="relative w-80 h-96 md:w-96 md:h-[480px]">
+            <div class="absolute top-6 right-0 w-56 h-64 md:w-64 md:h-72 rounded-lg overflow-hidden" style="box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+              <img src="https://burst.shopifycdn.com/photos/black-glass-perfume-bottle-and-spritzer.jpg?width=500" alt="Harmony Threads products" class="w-full h-full object-cover" style="filter:brightness(0.7);" />
+            </div>
+            <div class="absolute bottom-0 left-0 w-64 h-72 md:w-72 md:h-80 rounded-lg overflow-hidden" style="box-shadow:0 20px 60px rgba(0,0,0,0.6);">
+              <img src="https://burst.shopifycdn.com/photos/forest-hiker.jpg?width=1000" alt="The Band Graphic T-Shirt" class="w-full h-full object-cover" />
+              <div class="absolute bottom-0 left-0 right-0 p-4" style="background:linear-gradient(to top, rgba(24,17,12,0.9), transparent);">
+                <p class="text-xs font-semibold" style="color:var(--accent);">New Drop</p>
+                <p class="text-sm font-medium" style="color:var(--paper);">The Band Graphic T-Shirt</p>
+                <p class="text-sm" style="color:rgba(250,247,242,0.7);">From $19.99</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0" style="height:60px;overflow:hidden;">
+      <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="width:100%;height:100%;"><path d="M0,0 C360,60 1080,60 1440,0 L1440,60 L0,60 Z" fill="#FAF7F2"/></svg>
+    </div>
+  </section>
+
+  <!-- Featured Products -->
+  <section id="featured" style="background:var(--paper);" class="py-24 md:py-32">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex items-end justify-between mb-14">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-widest mb-3" style="color:var(--accent);">The Collection</p>
+          <h2 class="text-4xl md:text-5xl font-bold" style="font-family:'Playfair Display',serif;">Three things worth owning</h2>
+        </div>
+        <a href="/shop" class="hidden md:inline text-sm font-medium pb-0.5" style="color:var(--ink);border-bottom:1px solid var(--ink);">View all →</a>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <a href="/product/physical-product-the-band-t-shirt" class="group block" style="border:1px solid var(--line);border-radius:8px;overflow:hidden;transition:transform 0.2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
+          <div class="relative overflow-hidden" style="aspect-ratio:4/3;"><img src="https://burst.shopifycdn.com/photos/forest-hiker.jpg?width=1000" alt="The Band Graphic T-Shirt" class="w-full h-full object-cover" /><div class="absolute top-3 left-3 px-2 py-1 text-xs font-semibold rounded" style="background:var(--accent);color:#FAF7F2;">Bestseller</div></div>
+          <div class="p-5"><p class="text-xs uppercase tracking-wide mb-1" style="color:var(--muted);">Graphic Shirt</p><h3 class="text-lg font-bold mb-1" style="font-family:'Playfair Display',serif;">The Band T-Shirt</h3><p class="text-sm mb-3" style="color:var(--muted);">S/M/L/XL · Green, Gray, Red</p><div class="flex items-center justify-between"><div class="flex gap-2"><span class="text-lg font-bold">$19.99</span><span class="text-sm line-through" style="color:var(--muted);">$24.99</span></div><span class="text-sm" style="color:var(--accent);">Choose →</span></div></div>
+        </a>
+        <a href="/product/digital-product-the-history-of-rock-music" class="group block" style="border:1px solid var(--line);border-radius:8px;overflow:hidden;transition:transform 0.2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
+          <div class="relative overflow-hidden" style="aspect-ratio:4/3;background:var(--ink);display:flex;align-items:center;justify-content:center;padding:2rem;"><div class="text-center"><p class="text-xs uppercase tracking-widest mb-3" style="color:var(--accent);">Digital Book</p><h4 class="text-xl font-bold" style="font-family:'Playfair Display',serif;color:var(--paper);">The History of Rock Music</h4><p class="text-sm mt-3" style="color:rgba(250,247,242,0.6);">PDF · Audio · Kindle</p></div></div>
+          <div class="p-5"><p class="text-xs uppercase tracking-wide mb-1" style="color:var(--muted);">Digital Book</p><h3 class="text-lg font-bold mb-1" style="font-family:'Playfair Display',serif;">History of Rock Music</h3><p class="text-sm mb-3" style="color:var(--muted);">PDF, Audio, and Kindle</p><div class="flex items-center justify-between"><span class="text-lg font-bold">$14.99</span><span class="text-sm" style="color:var(--accent);">Get it →</span></div></div>
+        </a>
+        <a href="/product/example-perfume" class="group block" style="border:1px solid var(--line);border-radius:8px;overflow:hidden;transition:transform 0.2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
+          <div class="relative overflow-hidden" style="aspect-ratio:4/3;"><img src="https://burst.shopifycdn.com/photos/black-glass-perfume-bottle-and-spritzer.jpg?width=500" alt="Signature Perfume" class="w-full h-full object-cover" /></div>
+          <div class="p-5"><p class="text-xs uppercase tracking-wide mb-1" style="color:var(--muted);">Perfume</p><h3 class="text-lg font-bold mb-1" style="font-family:'Playfair Display',serif;">Signature Perfume</h3><p class="text-sm mb-3" style="color:var(--muted);">Premium men's fragrance</p><div class="flex items-center justify-between"><div class="flex gap-2"><span class="text-lg font-bold">$74.99</span><span class="text-sm line-through" style="color:var(--muted);">$80.00</span></div><span class="text-sm" style="color:var(--accent);">View →</span></div></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--accent);" class="py-16">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <p class="text-3xl md:text-4xl font-bold" style="font-family:'Playfair Display',serif;color:#FAF7F2;">&ldquo;Music gives a soul to the universe, wings to the mind.&rdquo;</p>
+      <p class="mt-4 text-sm" style="color:rgba(250,247,242,0.75);">— Plato &middot; Harmony Threads lives by this</p>
+    </div>
+  </section>
+
+  <section style="background:var(--ink);" class="py-20">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <h2 class="text-4xl font-bold mb-5" style="font-family:'Playfair Display',serif;color:var(--paper);">Ready to wear the legacy?</h2>
+      <p class="text-base mb-8" style="color:rgba(250,247,242,0.65);">Every order ships within 2 business days. Digital downloads arrive instantly.</p>
+      <a href="/shop" class="inline-block px-8 py-4 text-sm font-semibold rounded" style="background:var(--accent);color:#FAF7F2;">Shop the Collection</a>
+    </div>
+  </section>
+</Base>

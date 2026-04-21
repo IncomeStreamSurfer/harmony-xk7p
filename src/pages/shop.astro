@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+import { products } from '../lib/products';
+---
+<Base title="Shop — Harmony Threads" description="Browse The Band graphic tees, History of Rock Music digital book, and signature perfume. Free returns. Instant digital downloads." canonical="/shop">
+  <div style="background:var(--ink);" class="pt-32 pb-16">
+    <div class="max-w-7xl mx-auto px-6">
+      <p class="text-xs font-semibold uppercase tracking-widest mb-3" style="color:var(--accent);">The Full Catalogue</p>
+      <h1 class="text-5xl md:text-6xl font-bold" style="font-family:'Playfair Display',serif;color:var(--paper);">Shop</h1>
+    </div>
+  </div>
+  <section style="background:var(--paper);" class="py-16 md:py-24">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {products.map((product) => (
+          <a href={`/product/${product.slug}`} class="group block" style="border:1px solid var(--line);border-radius:8px;overflow:hidden;transition:transform 0.2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
+            <div class="relative overflow-hidden" style={`aspect-ratio:4/3;${product.isDigital ? 'background:var(--ink);display:flex;align-items:center;justify-content:center;padding:2rem;' : ''}`}>
+              {product.isDigital ? (
+                <div class="text-center">
+                  <p class="text-xs uppercase tracking-widest mb-3" style="color:var(--accent);">Digital</p>
+                  <p class="text-xl font-bold" style="font-family:'Playfair Display',serif;color:var(--paper);">{product.title}</p>
+                </div>
+              ) : (
+                <img src={product.image} alt={product.title} class="w-full h-full object-cover" />
+              )}
+            </div>
+            <div class="p-5">
+              <p class="text-xs uppercase tracking-wide mb-1" style="color:var(--muted);">{product.type} — {product.vendor}</p>
+              <h2 class="text-lg font-bold mb-1" style="font-family:'Playfair Display',serif;">{product.title}</h2>
+              <div class="flex items-center justify-between mt-3">
+                <div class="flex gap-2">
+                  <span class="text-lg font-bold">${product.price.toFixed(2)}</span>
+                  {product.comparePrice && <span class="text-sm line-through" style="color:var(--muted);">&#36;{product.comparePrice.toFixed(2)}</span>}
+                </div>
+                <span class="text-sm" style="color:var(--accent);">View →</span>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>

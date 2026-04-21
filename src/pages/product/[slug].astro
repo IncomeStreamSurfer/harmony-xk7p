@@ -1,0 +1,115 @@
+---
+import Base from '../../layouts/Base.astro';
+import { products, getProductBySlug } from '../../lib/products';
+export const prerender = false;
+const { slug } = Astro.params;
+const product = getProductBySlug(slug ?? '');
+if (!product) return Astro.redirect('/shop');
+const sizes = [...new Set(product.variants.filter(v => v.size).map(v => v.size))];
+const colors = [...new Set(product.variants.filter(v => v.color).map(v => v.color))];
+const savings = product.comparePrice ? (product.comparePrice - product.price).toFixed(2) : null;
+const schema = {
+  "@context": "https://schema.org", "@type": "Product",
+  "name": product.title, "description": product.description, "image": [product.image],
+  "brand": { "@type": "Brand", "name": product.vendor },
+  "offers": { "@type": "Offer", "price": product.price.toFixed(2), "priceCurrency": "USD", "availability": "https://schema.org/InStock" },
+};
+---
+<Base title={product.seoTitle} description={product.seoDescription} canonical={`/product/${product.slug}`} ogImage={product.image} schema={schema}>
+  <div style="background:var(--ink);" class="pt-28 pb-4">
+    <div class="max-w-7xl mx-auto px-6">
+      <nav class="flex gap-2 text-xs" style="color:rgba(250,247,242,0.5);">
+        <a href="/" style="color:rgba(250,247,242,0.5);">Home</a><span>/</span>
+        <a href="/shop" style="color:rgba(250,247,242,0.5);">Shop</a><span>/</span>
+        <span style="color:rgba(250,247,242,0.8);">{product.title}</span>
+      </nav>
+    </div>
+  </div>
+  <section style="background:var(--paper);" class="py-12 md:py-16">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div>
+          {product.isDigital ? (
+            <div class="rounded-lg overflow-hidden" style="aspect-ratio:1;background:var(--ink);display:flex;align-items:center;justify-content:center;padding:3rem;">
+              <div class="text-center">
+                <p class="text-xs uppercase tracking-widest mb-4" style="color:var(--accent);">Digital Download</p>
+                <h2 class="text-3xl font-bold" style="font-family:'Playfair Display',serif;color:var(--paper);">{product.title}</h2>
+                <div class="flex justify-center gap-2 mt-4">
+                  {product.variants.map(v => (<span class="px-2 py-0.5 text-xs rounded" style="background:rgba(200,98,42,0.3);color:var(--accent);">{v.size}</span>))}
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div class="rounded-lg overflow-hidden" style="aspect-ratio:1;"><img src={product.image} alt={product.title} class="w-full h-full object-cover" /></div>
+          )}
+        </div>
+        <div class="flex flex-col">
+          <p class="text-xs uppercase tracking-widest mb-3" style="color:var(--accent);">{product.type} — {product.vendor}</p>
+          <h1 class="text-3xl md:text-4xl font-bold mb-4" style="font-family:'Playfair Display',serif;">{product.title}</h1>
+          <div class="flex items-center gap-3 mb-6">
+            <span class="text-3xl font-bold">${product.price.toFixed(2)}</span>
+            {product.comparePrice && <><span class="text-xl line-through" style="color:var(--muted);">&#36;{product.comparePrice.toFixed(2)}</span><span class="px-2 py-0.5 text-xs font-bold rounded" style="background:rgba(200,98,42,0.15);color:var(--accent);">Save ${savings}</span></>}
+          </div>
+          <p class="text-sm leading-relaxed mb-8" style="color:var(--muted);">{product.description}</p>
+          {sizes.length > 1 && (
+            <div class="mb-5">
+              <p class="text-xs font-semibold uppercase tracking-wide mb-3">{product.isDigital ? 'Format' : 'Size'}</p>
+              <div class="flex flex-wrap gap-2" id="size-selector">
+                {sizes.map((size, i) => (
+                  <button data-size={size} class="size-btn px-4 py-2 text-sm font-medium rounded transition-all" style={i === 0 ? 'background:var(--ink);color:var(--paper);border:1px solid var(--ink);' : 'border:1px solid var(--line);color:var(--ink);'}>{size}</button>
+                ))}
+              </div>
+            </div>
+          )}
+          {colors.length > 1 && (
+            <div class="mb-6">
+              <p class="text-xs font-semibold uppercase tracking-wide mb-3">Colour</p>
+              <div class="flex gap-3" id="color-selector">
+                {colors.map((color, i) => (
+                  <button data-color={color} class="color-btn w-8 h-8 rounded-full border-2" style={`background-color:${color === 'gray' ? '#9CA3AF' : color === 'green' ? '#4B7C59' : color === 'red' ? '#B91C1C' : color};border-color:${i === 0 ? 'var(--ink)' : 'transparent'};`} title={color}></button>
+                ))}
+              </div>
+            </div>
+          )}
+          <button id="buy-btn" data-product-id={product.slug} data-price={Math.round(product.price * 100)} data-name={product.title} data-image={product.image} class="w-full py-4 text-sm font-semibold rounded hover:-translate-y-0.5 transition-all mb-3" style="background:var(--accent);color:#FAF7F2;">
+            {product.isDigital ? `Buy & Download — $${product.price.toFixed(2)}` : `Add to Cart — $${product.price.toFixed(2)}`}
+          </button>
+          <p class="text-xs text-center" style="color:var(--muted);">{product.isDigital ? '✓ Instant download · ✓ All formats' : '✓ Free returns 30 days · ✓ Ships in 2 days'}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section style="background:var(--ink);" class="py-16">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="text-2xl font-bold mb-8" style="font-family:'Playfair Display',serif;color:var(--paper);">You might also like</h2>
+      <div class="flex gap-6 overflow-x-auto pb-4">
+        {products.filter(p => p.slug !== product.slug).map(p => (
+          <a href={`/product/${p.slug}`} class="flex-shrink-0 w-56" style="border:1px solid rgba(250,247,242,0.1);border-radius:8px;overflow:hidden;">
+            <div style={`aspect-ratio:1;${p.isDigital ? 'background:rgba(200,98,42,0.15);display:flex;align-items:center;justify-content:center;padding:1rem;' : ''}`}>
+              {p.isDigital ? <p class="text-xs font-bold text-center" style="font-family:'Playfair Display',serif;color:var(--paper);">{p.title}</p> : <img src={p.image} alt={p.title} class="w-full h-full object-cover" />}
+            </div>
+            <div class="p-3"><p class="text-xs mb-1" style="color:var(--paper);">{p.title}</p><p class="text-sm font-bold" style="color:var(--accent);">&#36;{p.price.toFixed(2)}</p></div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+  <script>
+    const buyBtn = document.getElementById('buy-btn') as HTMLButtonElement | null;
+    buyBtn?.addEventListener('click', async () => {
+      const productId = buyBtn.getAttribute('data-product-id') ?? '';
+      const price = parseInt(buyBtn.getAttribute('data-price') ?? '1999');
+      const name = buyBtn.getAttribute('data-name') ?? '';
+      const image = buyBtn.getAttribute('data-image') ?? '';
+      buyBtn.textContent = 'Redirecting…';
+      buyBtn.disabled = true;
+      try {
+        const res = await fetch('/api/checkout', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ items: [{ product_id: productId, qty: 1, name, price_cents: price, image }] }) });
+        const { url, error } = await res.json();
+        if (error || !url) throw new Error(error ?? 'fail');
+        window.location.href = url;
+      } catch { buyBtn.textContent = 'Error — Try again'; buyBtn.disabled = false; }
+    });
+  </script>
+</Base>

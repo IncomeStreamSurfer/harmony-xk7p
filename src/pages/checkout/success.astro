@@ -1,0 +1,13 @@
+---
+import Base from '../../layouts/Base.astro';
+const sessionId = Astro.url.searchParams.get('session_id') ?? '';
+---
+<Base title="Order Confirmed — Harmony Threads" description="Your Harmony Threads order is confirmed.">
+  <div style="background:var(--ink);min-height:100vh;display:flex;align-items:center;justify-content:center;" class="px-6">
+    <div class="max-w-lg w-full text-center py-16">
+      <h1 class="text-4xl font-bold mb-4" style="font-family:'Playfair Display',serif;color:var(--paper);">Order Confirmed</h1>
+      <p class="mb-8" style="color:rgba(250,247,242,0.7);">Thank you for shopping at Harmony Threads. A confirmation email is on its way.</p>
+      <a href="/shop" class="px-6 py-3 text-sm font-semibold rounded" style="background:var(--accent);color:#FAF7F2;">Continue Shopping</a>
+    </div>
+  </div>
+</Base>

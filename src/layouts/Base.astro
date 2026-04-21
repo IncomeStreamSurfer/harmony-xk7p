@@ -1,0 +1,50 @@
+---
+import SEOHead from '../components/SEOHead.astro';
+import '../styles/global.css';
+interface Props { title: string; description: string; canonical?: string; ogImage?: string; schema?: object; }
+const { title, description, canonical, ogImage, schema } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head><SEOHead title={title} description={description} canonical={canonical} ogImage={ogImage} schema={schema} /></head>
+  <body>
+    <header id="site-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+      <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <a href="/" class="text-xl font-bold" style="font-family:'Playfair Display',serif;color:var(--paper);">Harmony Threads</a>
+        <nav class="hidden md:flex items-center gap-8">
+          <a href="/shop" class="text-sm font-medium" style="color:rgba(250,247,242,0.8);">Shop</a>
+          <a href="/about" class="text-sm font-medium" style="color:rgba(250,247,242,0.8);">About</a>
+          <a href="/contact" class="text-sm font-medium" style="color:rgba(250,247,242,0.8);">Contact</a>
+          <a href="/shop" class="px-4 py-2 text-sm font-semibold rounded" style="background:var(--accent);color:#FAF7F2;">Shop Now</a>
+        </nav>
+        <button id="mobile-menu-btn" class="md:hidden p-2" style="color:var(--paper);" aria-label="Menu">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+      <div id="mobile-menu" class="hidden md:hidden px-6 pb-4" style="background:var(--ink);">
+        <a href="/shop" class="block py-2 text-sm" style="color:var(--paper);">Shop</a>
+        <a href="/about" class="block py-2 text-sm" style="color:var(--paper);">About</a>
+        <a href="/contact" class="block py-2 text-sm" style="color:var(--paper);">Contact</a>
+      </div>
+    </header>
+    <slot />
+    <footer style="background:var(--ink);color:rgba(250,247,242,0.6);" class="py-12">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="flex flex-col md:flex-row justify-between gap-8">
+          <div><p class="text-xl font-bold mb-2" style="font-family:'Playfair Display',serif;color:var(--paper);">Harmony Threads</p><p class="text-sm">Music merch for those who live by the riff.</p></div>
+          <div class="flex flex-col gap-2"><p class="text-xs font-semibold uppercase tracking-widest mb-1" style="color:var(--accent);">Navigate</p><a href="/shop" class="text-sm" style="color:rgba(250,247,242,0.6);">Shop</a><a href="/about" class="text-sm" style="color:rgba(250,247,242,0.6);">About</a><a href="/contact" class="text-sm" style="color:rgba(250,247,242,0.6);">Contact</a></div>
+          <div class="flex flex-col gap-2"><p class="text-xs font-semibold uppercase tracking-widest mb-1" style="color:var(--accent);">Legal</p><a href="/privacy" class="text-sm" style="color:rgba(250,247,242,0.6);">Privacy</a><a href="/terms" class="text-sm" style="color:rgba(250,247,242,0.6);">Terms</a></div>
+        </div>
+        <div class="mt-10 pt-6" style="border-top:1px solid rgba(250,247,242,0.1);"><p class="text-xs">&copy; 2026 Harmony Threads.</p></div>
+      </div>
+    </footer>
+    <script>
+      const header = document.getElementById('site-header');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 60) { header?.style && (header.style.background = 'rgba(24,17,12,0.95)'); header?.style && (header.style.backdropFilter = 'blur(12px)'); header?.style && (header.style.borderBottom = '1px solid rgba(250,247,242,0.1)'); }
+        else { header?.style && (header.style.background = 'transparent'); header?.style && (header.style.backdropFilter = 'none'); header?.style && (header.style.borderBottom = 'none'); }
+      });
+      document.getElementById('mobile-menu-btn')?.addEventListener('click', () => { document.getElementById('mobile-menu')?.classList.toggle('hidden'); });
+    </script>
+  </body>
+</html>
