@@ -1,0 +1,21 @@
+{
+  "name": "harmony-xk7p",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.3.0",
+    "@astrojs/vercel": "^8.2.8",
+    "@supabase/supabase-js": "^2.49.4",
+    "@tailwindcss/vite": "^4.1.4",
+    "astro": "^5.14.1",
+    "stripe": "^17.7.0",
+    "tailwindcss": "^4.1.4"
+  }
+}
